@@ -1,0 +1,4 @@
+---
+- import_playbook: playbooks/stop_simple.yml
+- import_playbook: playbooks/start_simple.yml
+

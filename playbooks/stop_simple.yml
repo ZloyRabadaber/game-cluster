@@ -1,0 +1,13 @@
+---
+- hosts: rest
+  user: root
+  tasks:
+    - name: stop simple
+      docker_container:
+        name: simple
+        state: absent
+    - name: stop simple_v2
+      docker_container:
+        name: simple_v2
+        state: absent
+

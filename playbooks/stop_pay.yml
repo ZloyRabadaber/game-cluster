@@ -1,0 +1,13 @@
+---
+- hosts: rest
+  user: root
+  tasks:
+    - name: stop pay
+      docker_container:
+        name: pay
+        state: absent
+    - name: stop pay_v2
+      docker_container:
+        name: pay_v2
+        state: absent
+

@@ -1,0 +1,7 @@
+---
+- hosts: rest
+  user: root
+  tasks:
+    - include_tasks: ../tasks/simple.yml
+    - include_tasks: ../tasks/simple_v2.yml
+

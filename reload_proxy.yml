@@ -1,0 +1,10 @@
+---
+- hosts: proxy
+  user: root
+  tasks:
+    - name: stop proxy
+      docker_container:
+        name: proxy
+        state: absent
+    - include_tasks: tasks/proxy.yml
+

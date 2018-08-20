@@ -1,0 +1,7 @@
+---
+- hosts: rest
+  user: root
+  tasks:
+    - include_tasks: ../tasks/pay.yml
+    - include_tasks: ../tasks/pay_v2.yml
+

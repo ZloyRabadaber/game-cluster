@@ -1,0 +1,7 @@
+---
+- hosts: db
+  user: root
+  tasks:
+    - include_tasks: tasks/mongodb.yml
+    - include_tasks: tasks/showcase.yml
+

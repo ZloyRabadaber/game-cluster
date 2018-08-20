@@ -1,0 +1,16 @@
+    - name: creates directory for pay
+      file: path=/mnt/pay state=directory
+    - name: copy app
+      copy:
+        src: ../pay/
+        dest: /mnt/pay/
+    - name: create pay
+      shell: docker build -t pay /mnt/pay
+    - name: start pay
+      docker_container:
+        name: pay
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "8000:8000"
+        image: pay

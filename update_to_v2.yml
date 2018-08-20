@@ -1,0 +1,5 @@
+---
+- import_playbook: reload_showcase.yml
+- import_playbook: reload_simple.yml
+- import_playbook: reload_pay.yml
+- import_playbook: reload_proxy.yml

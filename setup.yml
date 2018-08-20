@@ -1,0 +1,6 @@
+---
+- import_playbook: setup_node.yml
+- import_playbook: setup_db.yml
+- import_playbook: setup_rest.yml
+- import_playbook: setup_games.yml
+- import_playbook: setup_proxy.yml

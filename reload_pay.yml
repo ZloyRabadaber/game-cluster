@@ -1,0 +1,4 @@
+---
+- import_playbook: playbooks/stop_pay.yml
+- import_playbook: playbooks/start_pay.yml
+

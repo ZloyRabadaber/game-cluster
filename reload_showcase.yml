@@ -1,0 +1,6 @@
+---
+- hosts: db
+  user: root
+  tasks:
+    - include_tasks: tasks/showcase.yml
+

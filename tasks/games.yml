@@ -1,0 +1,15 @@
+    - name: creates directory for games
+      file: path=/mnt/games state=directory
+    - name: start games
+      docker_container:
+        name: games
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "8081:80"
+        volumes:
+         - /mnt/games:/data/www
+        image: skiychan/nginx-php7
+
+
+

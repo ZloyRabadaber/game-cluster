@@ -1,0 +1,16 @@
+    - name: creates directory for simple_v2
+      file: path=/mnt/simple state=directory
+    - name: copy app
+      copy:
+        src: ../simple/v2/
+        dest: /mnt/simple/
+    - name: create simple_v2
+      shell: docker build -t simple_v2 /mnt/simple/v2
+    - name: start simple_v2
+      docker_container:
+        name: simple_v2
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "3031:3030"
+        image: simple_v2

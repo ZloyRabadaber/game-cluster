@@ -1,0 +1,32 @@
+    - name: create proxy directory
+      file: path=/mnt/proxy state=directory
+    - name: create haproxy config directory
+      file: path=/mnt/proxy/config state=directory
+    - name: create certs.d directory
+      file: path=/mnt/proxy/certs.d state=directory
+    - name: create letsencrypt directory
+      file: path=/mnt/proxy/letsencrypt state=directory
+    - name: copy proxy config
+      copy:
+        src: ../proxy/haproxy.cfg
+        dest: /mnt/proxy/config/haproxy.cfg
+    - name: start proxy
+      docker_container:
+        name: proxy
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "80:80"
+          - "443:443"
+          - "8080:8080"
+        capabilities:
+          - "NET_ADMIN"
+        volumes:
+          - /mnt/proxy/config:/config
+          - /mnt/proxy/letsencrypt:/etc/letsencrypt
+          - /mnt/proxy/certs.d:/usr/local/etc/haproxy/certs.d
+        image: nmarus/haproxy-certbot
+    - name: get certs
+      shell: docker exec proxy certbot-certonly --preferred-challenges=http-01 --expand --domain naogames.ru  --email afternao@gmail.com
+    - name: refresh proxy
+      shell: docker exec proxy haproxy-refresh

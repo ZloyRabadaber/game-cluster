@@ -1,0 +1,16 @@
+---
+- import_playbook: playbooks/stop_simple.yml
+- import_playbook: playbooks/stop_pay.yml
+- hosts: rest
+  user: root
+  tasks:
+    - name: remove collection arrows_users
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.arrows_users.drop()'
+    - name: remove collection users_arrows
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.users_arrows.drop()'
+    - name: remove collection pay
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.pay.drop()'
+    - name: remove collection pay_test
+          shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.pay_test.drop()'
+- import_playbook: playbooks/start_simple.yml
+- import_playbook: playbooks/start_pay.yml

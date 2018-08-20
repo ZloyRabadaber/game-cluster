@@ -1,0 +1,16 @@
+    - name: creates directory for simple
+      file: path=/mnt/simple state=directory
+    - name: copy app
+      copy:
+        src: ../simple/
+        dest: /mnt/simple/
+    - name: create simple
+      shell: docker build -t simple /mnt/simple
+    - name: start simple
+      docker_container:
+        name: simple
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "3030:3030"
+        image: simple

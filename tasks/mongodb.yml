@@ -1,0 +1,17 @@
+    - name: creates directory for mongodb
+      file: path=/mnt/mongo state=directory
+    - name: start mongodb
+      docker_container:
+        name: mongo
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "27017:27017"
+          - "27018:27018"
+        volumes:
+          - /mnt/mongo:/data/db
+        env:
+          MONGODB_DATABASE: dkey
+          MONGODB_USER: ukey
+          MONGODB_PASS: pkey
+        image: tutum/mongodb

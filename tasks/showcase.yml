@@ -1,0 +1,32 @@
+    - name: creates directory for games
+      file: path=/mnt/games state=directory
+    - name: creates directory for showcase
+      file: path=/mnt/games/showcase state=directory
+    - name: copy showcase
+      copy:
+        src: ../showcase/
+        dest: /mnt/games/showcase/
+    - name: remove collection showcase
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.showcase.drop()'
+    - name: write buy_all
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.showcase.insert({app_id:5900777,item:"buy_all",title:"Полная разблокировка",photo_url:"https://naogames.ru/showcase/icon_all.png",price:20,item_id:"1"})'
+    - name: write buy_life_small
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.showcase.insert({app_id:5900777,item:"buy_life_small",title:"Восстановление жизней",photo_url:"https://naogames.ru/showcase/icon_life_small.png",price:1,item_id:"2"})'
+    - name: write buy_life_mid
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.showcase.insert({app_id:5900777,item:"buy_life_mid",title:"В 2 раза больше жизней",photo_url:"https://naogames.ru/showcase/icon_life_mid.png",price:2,item_id:"3"})'
+    - name: write buy_life_large
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.showcase.insert({app_id:5900777,item:"buy_life_large",title:"В 5 раз больше жизней",photo_url:"https://naogames.ru/showcase/icon_life_large.png",price:4,item_id:"4"})'
+    - name: write buy_fstep_small
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.showcase.insert({app_id:5900777,item:"buy_fstep_small",title:"+10 подсказок первого хода",photo_url:"https://naogames.ru/showcase/icon_fstep_small.png",price:1,item_id:"5"})'
+    - name: write buy_fstep_mid
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.showcase.insert({app_id:5900777,item:"buy_fstep_mid",title:"+25 подсказок первого хода",photo_url:"https://naogames.ru/showcase/icon_fstep_mid.png",price:2,item_id:"6"})'
+    - name: write buy_fstep_large
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.showcase.insert({app_id:5900777,item:"buy_fstep_large",title:"+50 подсказок первого хода",photo_url:"https://naogames.ru/showcase/icon_fstep_large.png",price:4,item_id:"7"})'
+    - name: write buy_back_small
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.showcase.insert({app_id:5900777,item:"buy_back_small",title:"+10 отмен хода",photo_url:"https://naogames.ru/showcase/icon_back_small.png",price:3,item_id:"8"})'
+    - name: write buy_back_mid
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.showcase.insert({app_id:5900777,item:"buy_back_mid",title:"+25 отмен хода",photo_url:"https://naogames.ru/showcase/icon_back_mid.png",price:4,item_id:"9"})'
+    - name: write buy_back_large
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.showcase.insert({app_id:5900777,item:"buy_back_large",title:"+50 отмен хода",photo_url:"https://naogames.ru/showcase/icon_back_large.png",price:7,item_id:"10"})'
+    - name: write buy_reset
+      shell: docker exec mongo mongo simple -u simple -p simple --eval 'db.showcase.insert({app_id:5900777,item:"buy_reset",title:"Сброс прогресса и рейтинга",photo_url:"https://naogames.ru/showcase/icon_reset.png",price:7,item_id:"11"})'

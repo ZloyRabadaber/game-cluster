@@ -1,0 +1,16 @@
+    - name: install apt-transport-https
+      apt: pkg=apt-transport-https state=installed update_cache=true
+    - name: install ca-certificates
+      apt: pkg=ca-certificates state=installed update_cache=false
+    - name: install curl
+      apt: pkg=curl state=installed update_cache=false
+    - name: install software-properties-common
+      apt: pkg=software-properties-common state=installed update_cache=false
+    - name: add Docker’s official GPG key
+      shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+    - name: add Docker’s official repository
+      shell: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    - name: install docker-ce
+      apt: pkg=docker-ce state=installed update_cache=true
+
+
